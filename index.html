@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,13 @@
     <meta name="description" content="Portfolio of Mohammed Isham, a passionate developer and problem solver.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
@@ -26,146 +30,49 @@
         <div class="hamburger">
             <span></span>
             <span></span>
+            <span></span>
         </div>
     </nav>
 
     <main>
         <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Mohammed <span class="highlight">Isham</span></h1>
-                <p class="hero-subtitle">Developer & Problem Solver</p>
-                <p class="hero-description">
-                    Enthusiastic individual with a passion for problem-solving and continuous learning. 
-                    Eager to apply my technical skills in a dynamic environment. Excited to explore new 
-                    challenges and contribute effectively to team projects, driving innovation through 
-                    my dedication and knowledge.
-                </p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn primary">View Work</a>
-                    <a href="#contact" class="btn secondary">Contact Me</a>
-                </div>
-                <div class="social-links">
-                    <a href="#" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
-                    <a href="#" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                    <a href="mailto:ishammohammedper10@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
-                </div>
+            <div class="hero-content" id="hero-content">
+                <!-- Content injected by JS -->
             </div>
         </section>
 
         <section id="experience" class="section">
             <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Dec 2024 - Feb 2025</div>
-                    <div class="timeline-content">
-                        <h3>Intern/Developer</h3>
-                        <h4>Abhimo Technologies</h4>
-                        <ul>
-                            <li>Developed mock UI for corporate bank applications using React, modernizing the user interface and improving user experience.</li>
-                            <li>Assisted in database migration from Oracle SQL to MySQL, ensuring data integrity and optimizing query performance.</li>
-                            <li>Collaborated with the development team to implement responsive design patterns for banking applications.</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="timeline" id="experience-container">
+                <!-- Content injected by JS -->
             </div>
         </section>
 
         <section id="education" class="section">
             <h2 class="section-title">Education</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Feb 2024 - Oct 2025</div>
-                    <div class="timeline-content">
-                        <h3>Master of Computer Application</h3>
-                        <h4>Mangalore Institute of Technology and Engineering, Badaga Mijar</h4>
-                        <p class="grade">CGPA: 8.07</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">June 2020 - Aug 2023</div>
-                    <div class="timeline-content">
-                        <h3>Bachelors of Computer Application</h3>
-                        <h4>Vijaya College, Mulki</h4>
-                        <p class="grade">CGPA: 7.16</p>
-                    </div>
-                </div>
+            <div class="timeline" id="education-container">
+                <!-- Content injected by JS -->
             </div>
         </section>
 
         <section id="skills" class="section">
             <h2 class="section-title">Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-tags">
-                        <span>C</span><span>C++</span><span>Java</span><span>JavaScript</span><span>Python</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Web Development</h3>
-                    <div class="skill-tags">
-                        <span>MERN Stack</span><span>React</span><span>HTML/CSS</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Frameworks & Tools</h3>
-                    <div class="skill-tags">
-                        <span>Unity</span><span>Godot</span><span>Android Studio</span><span>Hadoop</span><span>Git</span><span>Docker</span>
-                    </div>
-                </div>
+            <div class="skills-container" id="skills-container">
+                <!-- Content injected by JS -->
             </div>
         </section>
 
         <section id="projects" class="section">
             <h2 class="section-title">Selected Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card" data-tilt>
-                    <div class="project-content">
-                        <h3>Branch LLM</h3>
-                        <p class="project-desc">Developed a local branching memory interface for exploratory AI conversations, enabling users to fork conversation branches while preserving context.</p>
-                        <div class="project-tags">
-                            <span>AI</span><span>LLM</span><span>Research</span>
-                        </div>
-                        <div class="project-details">
-                            <p><strong>Focus:</strong> Explored context compression techniques to optimize token usage in branched conversations.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-tilt>
-                    <div class="project-content">
-                        <h3>File Organizer</h3>
-                        <p class="project-desc">Designed a Python-based tool to automatically organize and categorize files in a directory based on file type, size, or custom rules.</p>
-                        <div class="project-tags">
-                            <span>Python</span><span>Automation</span><span>Tool</span>
-                        </div>
-                        <div class="project-details">
-                            <p>Implemented features to reduce manual file management effort, improving productivity and directory cleanliness.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-tilt>
-                    <div class="project-content">
-                        <h3>SiteSentinel</h3>
-                        <p class="project-desc">Developed a browser extension to retrieve and save URLs of visited pages.</p>
-                        <div class="project-tags">
-                            <span>Browser Extension</span><span>JavaScript</span><span>Privacy</span>
-                        </div>
-                        <div class="project-details">
-                            <p>Implemented features to enhance user experience, such as a timer and tab blurring.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="projects-grid" id="projects-container">
+                <!-- Content injected by JS -->
             </div>
         </section>
 
         <section id="contact" class="section contact-section">
             <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <p>I'm currently available for freelance work or full-time opportunities. If you have a project that needs some creative touch, feel free to contact me.</p>
-                <a href="mailto:ishammohammedper10@gmail.com" class="email-link">ishammohammedper10@gmail.com</a>
-                <p class="phone">+91 8088653147</p>
+            <div class="contact-content" id="contact-container">
+                <!-- Content injected by JS -->
             </div>
         </section>
     </main>
@@ -174,9 +81,11 @@
         <p>&copy; 2025 Mohammed Isham. All rights reserved.</p>
     </footer>
 
+    <script src="js/data.js"></script>
     <script src="js/script.js"></script>
     <script>
         lucide.createIcons();
     </script>
 </body>
+
 </html>
