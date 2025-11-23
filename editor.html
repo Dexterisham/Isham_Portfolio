@@ -8,160 +8,79 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --card-bg: #171717;
-            --text-color: #e0e0e0;
-            --accent-color: #3b82f6;
-            --border-color: #333;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#0a0a0a',
+                        text: '#e0e0e0',
+                        accent: '#3b82f6',
+                        'secondary-text': '#a0a0a0',
+                        'card-bg': '#171717',
+                        'card-hover': '#262626',
+                        'border-color': '#333',
+                    },
+                    fontFamily: {
+                        main: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
         }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        h1,
-        h2 {
-            color: var(--accent-color);
-        }
-
-        .section-editor {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background: #222;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 4px;
-            font-family: inherit;
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: opacity 0.2s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background: #444;
-        }
-
-        .btn-danger {
-            background: #ef4444;
-        }
-
-        .item-list {
-            margin-top: 1rem;
-        }
-
-        .item-card {
-            background: #222;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        #save-area {
-            position: sticky;
-            bottom: 2rem;
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--accent-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-    </style>
+    </script>
 </head>
 
-<body>
-    <h1>Portfolio Editor</h1>
-    <p>Edit your content below and click "Download Updated Data" to save changes. Replace the existing
-        <code>js/data.js</code> file with the downloaded one.</p>
+<body class="bg-bg text-text font-main p-8 max-w-5xl mx-auto">
+    <h1 class="text-4xl font-bold text-accent mb-4">Portfolio Editor</h1>
+    <p class="mb-8 text-secondary-text">Edit your content below and click "Download Updated Data" to save changes.
+        Replace the existing
+        <code class="bg-card-bg px-2 py-1 rounded text-accent">js/data.js</code> file with the downloaded one.
+    </p>
 
-    <div class="section-editor">
-        <h2>Profile</h2>
-        <div class="form-group">
-            <label>First Name</label>
-            <input type="text" id="profile-name">
+    <div class="bg-card-bg p-6 rounded-xl border border-border-color mb-8">
+        <h2 class="text-2xl font-bold text-accent mb-6">Profile</h2>
+        <div class="mb-4">
+            <label class="block mb-2 font-medium">First Name</label>
+            <input type="text" id="profile-name"
+                class="w-full p-3 bg-[#222] border border-border-color text-text rounded focus:outline-none focus:border-accent transition-colors">
         </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" id="profile-lastname">
+        <div class="mb-4">
+            <label class="block mb-2 font-medium">Last Name</label>
+            <input type="text" id="profile-lastname"
+                class="w-full p-3 bg-[#222] border border-border-color text-text rounded focus:outline-none focus:border-accent transition-colors">
         </div>
-        <div class="form-group">
-            <label>Subtitle</label>
-            <input type="text" id="profile-subtitle">
+        <div class="mb-4">
+            <label class="block mb-2 font-medium">Subtitle</label>
+            <input type="text" id="profile-subtitle"
+                class="w-full p-3 bg-[#222] border border-border-color text-text rounded focus:outline-none focus:border-accent transition-colors">
         </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="profile-desc"></textarea>
+        <div class="mb-4">
+            <label class="block mb-2 font-medium">Description</label>
+            <textarea id="profile-desc"
+                class="w-full p-3 bg-[#222] border border-border-color text-text rounded min-h-[100px] focus:outline-none focus:border-accent transition-colors"></textarea>
         </div>
     </div>
 
-    <div class="section-editor">
-        <h2>Experience</h2>
-        <div id="experience-list" class="item-list"></div>
-        <button class="btn btn-secondary" onclick="addItem('experience')">+ Add Experience</button>
+    <div class="bg-card-bg p-6 rounded-xl border border-border-color mb-8">
+        <h2 class="text-2xl font-bold text-accent mb-6">Experience</h2>
+        <div id="experience-list" class="space-y-4 mb-4"></div>
+        <button class="px-6 py-2 bg-[#444] text-white rounded hover:bg-[#555] transition-colors font-semibold"
+            onclick="addItem('experience')">+ Add Experience</button>
     </div>
 
-    <div class="section-editor">
-        <h2>Projects</h2>
-        <div id="projects-list" class="item-list"></div>
-        <button class="btn btn-secondary" onclick="addItem('projects')">+ Add Project</button>
+    <div class="bg-card-bg p-6 rounded-xl border border-border-color mb-8">
+        <h2 class="text-2xl font-bold text-accent mb-6">Projects</h2>
+        <div id="projects-list" class="space-y-4 mb-4"></div>
+        <button class="px-6 py-2 bg-[#444] text-white rounded hover:bg-[#555] transition-colors font-semibold"
+            onclick="addItem('projects')">+ Add Project</button>
     </div>
 
-    <div id="save-area">
-        <span>Ready to save?</span>
-        <button class="btn" onclick="downloadData()">Download Updated data.js</button>
+    <div id="save-area"
+        class="sticky bottom-8 bg-card-bg p-4 rounded-xl border border-accent flex justify-between items-center shadow-2xl shadow-black/50">
+        <span class="font-medium">Ready to save?</span>
+        <button class="px-6 py-3 bg-accent text-white rounded hover:opacity-90 transition-opacity font-bold"
+            onclick="downloadData()">Download Updated data.js</button>
     </div>
 
     <script src="js/data.js"></script>
@@ -180,12 +99,12 @@
             container.innerHTML = '';
             data.forEach((item, index) => {
                 const div = document.createElement('div');
-                div.className = 'item-card';
+                div.className = 'bg-[#222] p-4 rounded flex justify-between items-center';
                 div.innerHTML = `
-                    <span>${labelFn(item)}</span>
-                    <div class="actions">
-                        <button class="btn btn-secondary" onclick="editItem('${type}', ${index})">Edit</button>
-                        <button class="btn btn-danger" onclick="deleteItem('${type}', ${index})">Delete</button>
+                    <span class="font-medium">${labelFn(item)}</span>
+                    <div class="flex gap-2">
+                        <button class="px-3 py-1 bg-[#444] text-white rounded hover:bg-[#555] text-sm" onclick="editItem('${type}', ${index})">Edit</button>
+                        <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm" onclick="deleteItem('${type}', ${index})">Delete</button>
                     </div>
                 `;
                 container.appendChild(div);

@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                entry.target.classList.remove('opacity-0', 'translate-y-10');
+                entry.target.classList.add('opacity-100', 'translate-y-0');
                 observer.unobserve(entry.target); // Only animate once
             }
         });
@@ -65,9 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         document.querySelectorAll('.timeline-item, .skill-category, .project-card').forEach(el => {
             observer.observe(el);
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
         });
 
         // Initialize Tilt Effect for Project Cards
@@ -77,33 +76,37 @@ document.addEventListener('DOMContentLoaded', () => {
         initContactHoverEffect();
     }, 100);
 
-    // Add visible class styles dynamically if not in CSS
-    const styleSheet = document.createElement("style");
-    styleSheet.innerText = `
-        .visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(styleSheet);
-
 
     // Hamburger Menu
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const links = document.querySelectorAll('.nav-links li');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    if (hamburger && navLinks) {
+    if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('translate-x-full');
+            mobileMenu.classList.toggle('translate-x-0');
+
+            // Hamburger Animation
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].classList.toggle('rotate-45');
+            spans[0].classList.toggle('translate-y-2');
+            spans[1].classList.toggle('opacity-0');
+            spans[2].classList.toggle('-rotate-45');
+            spans[2].classList.toggle('-translate-y-2');
         });
 
         // Close menu when clicking a link
-        links.forEach(link => {
+        mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
+                mobileMenu.classList.add('translate-x-full');
+                mobileMenu.classList.remove('translate-x-0');
+
+                // Reset Hamburger
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].classList.remove('rotate-45', 'translate-y-2');
+                spans[1].classList.remove('opacity-0');
+                spans[2].classList.remove('-rotate-45', '-translate-y-2');
             });
         });
     }
@@ -117,17 +120,17 @@ function renderHero() {
     const { name, lastName, subtitle, description, social } = portfolioData.profile;
 
     heroContainer.innerHTML = `
-        <h1 class="hero-title">${name} <span class="highlight">${lastName}</span></h1>
-        <p class="hero-subtitle">${subtitle}</p>
-        <p class="hero-description">${description}</p>
-        <div class="hero-cta">
-            <a href="#projects" class="btn primary">View Work</a>
-            <a href="#contact" class="btn secondary contact-trigger">Contact Me</a>
+        <h1 class="text-5xl md:text-7xl font-bold font-mono mb-6 tracking-tighter">${name} <span class="text-gradient">${lastName}</span></h1>
+        <p class="text-xl md:text-2xl text-secondary-text mb-8 font-light">${subtitle}</p>
+        <p class="text-lg text-secondary-text mb-10 max-w-lg mx-auto leading-relaxed">${description}</p>
+        <div class="flex gap-4 justify-center mb-12">
+            <a href="#projects" class="px-8 py-3 rounded-full bg-text text-bg font-semibold hover:bg-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-accent/25">View Work</a>
+            <a href="#contact" class="px-8 py-3 rounded-full border border-secondary-text text-text font-semibold hover:border-text hover:bg-white/5 transition-all duration-300 contact-trigger">Contact Me</a>
         </div>
-        <div class="social-links">
-            <a href="${social.github}" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
-            <a href="${social.linkedin}" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-            <a href="mailto:${portfolioData.profile.email}" aria-label="Email"><i data-lucide="mail"></i></a>
+        <div class="flex gap-6 justify-center">
+            <a href="${social.github}" target="_blank" aria-label="GitHub" class="text-secondary-text hover:text-accent transition-all duration-300 hover:-translate-y-1"><i data-lucide="github" width="24" height="24"></i></a>
+            <a href="${social.linkedin}" target="_blank" aria-label="LinkedIn" class="text-secondary-text hover:text-accent transition-all duration-300 hover:-translate-y-1"><i data-lucide="linkedin" width="24" height="24"></i></a>
+            <a href="mailto:${portfolioData.profile.email}" aria-label="Email" class="text-secondary-text hover:text-accent transition-all duration-300 hover:-translate-y-1"><i data-lucide="mail" width="24" height="24"></i></a>
         </div>
     `;
 }
@@ -136,13 +139,16 @@ function renderExperience() {
     const container = document.getElementById('experience-container');
     if (!container) return;
 
-    container.innerHTML = portfolioData.experience.map(item => `
-        <div class="timeline-item">
-            <div class="timeline-date">${item.date}</div>
-            <div class="timeline-content">
-                <h3>${item.role}</h3>
-                <h4>${item.company}</h4>
-                <ul>
+    container.innerHTML += portfolioData.experience.map(item => `
+        <div class="timeline-item relative pl-8 md:pl-12 mb-12 group">
+            <!-- Dot -->
+            <div class="absolute left-4 md:left-0 top-1.5 w-3 h-3 -translate-x-[5px] rounded-full bg-accent ring-4 ring-bg group-hover:ring-accent/20 transition-all duration-300"></div>
+            
+            <div class="text-sm font-mono text-accent mb-2">${item.date}</div>
+            <div class="bg-card-bg p-6 rounded-xl border border-white/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5">
+                <h3 class="text-2xl font-bold mb-1 text-text">${item.role}</h3>
+                <h4 class="text-lg text-secondary-text mb-4 font-normal">${item.company}</h4>
+                <ul class="list-disc list-inside text-secondary-text space-y-2 marker:text-accent">
                     ${item.details.map(detail => `<li>${detail}</li>`).join('')}
                 </ul>
             </div>
@@ -154,13 +160,15 @@ function renderEducation() {
     const container = document.getElementById('education-container');
     if (!container) return;
 
-    container.innerHTML = portfolioData.education.map(item => `
-        <div class="timeline-item">
-            <div class="timeline-date">${item.date}</div>
-            <div class="timeline-content">
-                <h3>${item.degree}</h3>
-                <h4>${item.school}</h4>
-                <p class="grade">${item.grade}</p>
+    container.innerHTML += portfolioData.education.map(item => `
+        <div class="timeline-item relative pl-8 md:pl-12 mb-12 group">
+            <div class="absolute left-4 md:left-0 top-1.5 w-3 h-3 -translate-x-[5px] rounded-full bg-accent ring-4 ring-bg group-hover:ring-accent/20 transition-all duration-300"></div>
+            
+            <div class="text-sm font-mono text-accent mb-2">${item.date}</div>
+            <div class="bg-card-bg p-6 rounded-xl border border-white/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5">
+                <h3 class="text-2xl font-bold mb-1 text-text">${item.degree}</h3>
+                <h4 class="text-lg text-secondary-text mb-2 font-normal">${item.school}</h4>
+                <p class="text-accent font-mono text-sm">${item.grade}</p>
             </div>
         </div>
     `).join('');
@@ -177,10 +185,12 @@ function renderSkills() {
     ];
 
     container.innerHTML = categories.map(cat => `
-        <div class="skill-category">
-            <h3>${cat.title}</h3>
-            <div class="skill-tags">
-                ${portfolioData.skills[cat.key].map(skill => `<span>${skill}</span>`).join('')}
+        <div class="skill-category bg-card-bg p-8 rounded-2xl border border-white/5 hover:border-accent hover:-translate-y-2 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
+            <h3 class="text-xl font-bold mb-6 text-text">${cat.title}</h3>
+            <div class="flex flex-wrap gap-3">
+                ${portfolioData.skills[cat.key].map(skill => `
+                    <span class="px-4 py-2 bg-white/5 rounded-full text-sm text-secondary-text hover:bg-accent hover:text-white transition-all duration-300 cursor-default border border-white/5 hover:border-accent">${skill}</span>
+                `).join('')}
             </div>
         </div>
     `).join('');
@@ -191,15 +201,15 @@ function renderProjects() {
     if (!container) return;
 
     container.innerHTML = portfolioData.projects.map(project => `
-        <div class="project-card" data-tilt>
-            <div class="project-content">
-                <h3>${project.title}</h3>
-                <p class="project-desc">${project.description}</p>
-                <div class="project-tags">
-                    ${project.tags.map(tag => `<span>${tag}</span>`).join('')}
+        <div class="project-card bg-card-bg rounded-2xl p-8 border border-white/5 hover:border-accent hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden hover:shadow-2xl hover:shadow-accent/10" data-tilt>
+            <div class="relative z-10">
+                <h3 class="text-2xl font-bold mb-3 text-text group-hover:text-accent transition-colors">${project.title}</h3>
+                <p class="text-secondary-text mb-6 text-sm leading-relaxed">${project.description}</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    ${project.tags.map(tag => `<span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-md border border-accent/20">${tag}</span>`).join('')}
                 </div>
-                <div class="project-details">
-                    <p>${project.details}</p>
+                <div class="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-500 ease-in-out border-t border-white/10">
+                    <p class="pt-4 text-sm text-secondary-text">${project.details}</p>
                 </div>
             </div>
         </div>
@@ -213,9 +223,9 @@ function renderContact() {
     const { email, phone } = portfolioData.profile;
 
     container.innerHTML = `
-        <p>I'm currently available for freelance work or full-time opportunities. If you have a project that needs some creative touch, feel free to contact me.</p>
-        <a href="mailto:${email}" class="email-link">${email}</a>
-        <p class="phone">${phone}</p>
+        <p class="text-secondary-text mb-8 text-lg leading-relaxed">I'm currently available for freelance work or full-time opportunities. If you have a project that needs some creative touch, feel free to contact me.</p>
+        <a href="mailto:${email}" class="text-3xl md:text-5xl font-bold text-text hover:text-accent transition-colors duration-300 block mb-6 tracking-tight">${email}</a>
+        <p class="font-mono text-secondary-text">${phone}</p>
     `;
 }
 

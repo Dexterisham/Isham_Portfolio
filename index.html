@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -11,73 +11,154 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#0a0a0a',
+                        text: '#e0e0e0',
+                        accent: '#3b82f6',
+                        'secondary-text': '#a0a0a0',
+                        'card-bg': '#171717',
+                        'card-hover': '#262626',
+                    },
+                    fontFamily: {
+                        main: ['Outfit', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    container: {
+                        center: true,
+                        padding: '1rem',
+                        screens: {
+                            xl: '1200px',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-blue-400;
+            }
+            .section-title {
+                @apply text-4xl font-bold mb-16 text-center relative inline-block left-1/2 -translate-x-1/2;
+            }
+            .section-title::after {
+                content: '';
+                @apply absolute w-[60px] h-[4px] bg-accent -bottom-2.5 left-1/2 -translate-x-1/2 rounded-sm;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+<body
+    class="bg-bg text-text font-main leading-relaxed overflow-x-hidden antialiased selection:bg-accent selection:text-white">
+    <div
+        class="cursor-dot fixed top-0 left-0 w-2 h-2 bg-accent rounded-full z-[9999] pointer-events-none -translate-x-1/2 -translate-y-1/2 hidden md:block">
+    </div>
+    <div
+        class="cursor-outline fixed top-0 left-0 w-10 h-10 border border-accent rounded-full z-[9999] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ease-out hidden md:block">
+    </div>
 
-    <nav class="navbar">
-        <div class="logo">MI.</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <nav class="fixed w-full top-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
+        <div class="container flex justify-between items-center py-6 px-5 lg:px-0">
+            <div class="text-2xl font-bold font-mono text-text">MI.</div>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex gap-8 list-none">
+                <li><a href="#about"
+                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">About<span
+                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
+                </li>
+                <li><a href="#experience"
+                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">Experience<span
+                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
+                </li>
+                <li><a href="#projects"
+                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">Projects<span
+                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
+                </li>
+                <li><a href="#contact"
+                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">Contact<span
+                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
+                </li>
+            </ul>
+
+            <!-- Mobile Hamburger -->
+            <div class="md:hidden cursor-pointer z-[1001] space-y-1.5 group" id="hamburger">
+                <span class="block w-6 h-0.5 bg-text transition-transform duration-300 origin-center"></span>
+                <span class="block w-6 h-0.5 bg-text transition-opacity duration-300"></span>
+                <span class="block w-6 h-0.5 bg-text transition-transform duration-300 origin-center"></span>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="fixed inset-0 bg-bg/95 backdrop-blur-xl z-[1000] flex flex-col justify-center items-center gap-8 transition-all duration-300 translate-x-full md:hidden"
+            id="mobile-menu">
+            <a href="#about"
+                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">About</a>
+            <a href="#experience"
+                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">Experience</a>
+            <a href="#projects"
+                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">Projects</a>
+            <a href="#contact"
+                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">Contact</a>
         </div>
     </nav>
 
     <main>
-        <section id="hero" class="hero-section">
-            <div class="hero-content" id="hero-content">
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center px-4 relative pt-20">
+            <div class="max-w-2xl mx-auto" id="hero-content">
                 <!-- Content injected by JS -->
             </div>
         </section>
 
-        <section id="experience" class="section">
+        <section id="experience" class="py-24 px-4 max-w-6xl mx-auto">
             <h2 class="section-title">Experience</h2>
-            <div class="timeline" id="experience-container">
+            <div class="relative max-w-3xl mx-auto pl-4 md:pl-0" id="experience-container">
+                <!-- Vertical Line -->
+                <div class="absolute left-4 md:left-0 top-0 h-full w-[2px] bg-card-bg"></div>
                 <!-- Content injected by JS -->
             </div>
         </section>
 
-        <section id="education" class="section">
+        <section id="education" class="py-24 px-4 max-w-6xl mx-auto">
             <h2 class="section-title">Education</h2>
-            <div class="timeline" id="education-container">
+            <div class="relative max-w-3xl mx-auto pl-4 md:pl-0" id="education-container">
+                <div class="absolute left-4 md:left-0 top-0 h-full w-[2px] bg-card-bg"></div>
                 <!-- Content injected by JS -->
             </div>
         </section>
 
-        <section id="skills" class="section">
+        <section id="skills" class="py-24 px-4 max-w-6xl mx-auto">
             <h2 class="section-title">Skills</h2>
-            <div class="skills-container" id="skills-container">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="skills-container">
                 <!-- Content injected by JS -->
             </div>
         </section>
 
-        <section id="projects" class="section">
+        <section id="projects" class="py-24 px-4 max-w-6xl mx-auto">
             <h2 class="section-title">Selected Projects</h2>
-            <div class="projects-grid" id="projects-container">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
                 <!-- Content injected by JS -->
             </div>
         </section>
 
-        <section id="contact" class="section contact-section">
+        <section id="contact" class="py-24 px-4 text-center mb-16">
             <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content" id="contact-container">
+            <div class="max-w-2xl mx-auto" id="contact-container">
                 <!-- Content injected by JS -->
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="text-center py-8 border-t border-white/5 text-secondary-text text-sm">
         <p>&copy; 2025 Mohammed Isham. All rights reserved.</p>
     </footer>
 
