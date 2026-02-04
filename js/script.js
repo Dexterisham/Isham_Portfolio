@@ -77,39 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 
 
-    // Hamburger Menu
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-
-    if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('translate-x-full');
-            mobileMenu.classList.toggle('translate-x-0');
-
-            // Hamburger Animation
-            const spans = hamburger.querySelectorAll('span');
-            spans[0].classList.toggle('rotate-45');
-            spans[0].classList.toggle('translate-y-2');
-            spans[1].classList.toggle('opacity-0');
-            spans[2].classList.toggle('-rotate-45');
-            spans[2].classList.toggle('-translate-y-2');
-        });
-
-        // Close menu when clicking a link
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('translate-x-full');
-                mobileMenu.classList.remove('translate-x-0');
-
-                // Reset Hamburger
-                const spans = hamburger.querySelectorAll('span');
-                spans[0].classList.remove('rotate-45', 'translate-y-2');
-                spans[1].classList.remove('opacity-0');
-                spans[2].classList.remove('-rotate-45', '-translate-y-2');
-            });
-        });
-    }
+    // Hamburger Menu Logic Removed (Navbar Redesigned)
 });
 
 // Rendering Functions
@@ -120,7 +88,20 @@ function renderHero() {
     const { name, lastName, subtitle, description, social } = portfolioData.profile;
 
     heroContainer.innerHTML = `
-        <h1 class="text-5xl md:text-7xl font-bold font-mono mb-6 tracking-tighter">${name} <span class="text-gradient">${lastName}</span></h1>
+        <div id="name-container" class="relative inline-block cursor-none mb-6">
+            <!-- Original Layer -->
+            <h1 class="text-5xl md:text-7xl font-bold font-mono tracking-tighter select-none">${name} <span class="text-gradient">${lastName}</span></h1>
+            
+            <!-- Magnified Layer (Fixed: Added bg-bg to hide original text underneath) -->
+            <div id="magnifier-layer" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 bg-bg" aria-hidden="true">
+                <h1 class="text-5xl md:text-7xl font-bold font-mono tracking-tighter">${name} <span class="text-gradient">${lastName}</span></h1>
+            </div>
+
+            <!-- Glass Rim (Refined: Less frosty, more glossy, smooth scale entrance) -->
+            <div id="magnifier-rim" class="absolute w-32 h-32 border border-white/20 rounded-full pointer-events-none opacity-0 scale-75 shadow-2xl transition-all duration-300 ease-out z-10 backdrop-blur-[1px] bg-gradient-to-br from-white/20 to-transparent" 
+                 style="box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.4), 0 0 15px rgba(59, 130, 246, 0.4);"></div>
+        </div>
+
         <p class="text-xl md:text-2xl text-secondary-text mb-8 font-light">${subtitle}</p>
         <p class="text-lg text-secondary-text mb-10 max-w-lg mx-auto leading-relaxed">${description}</p>
         <div class="flex gap-4 justify-center mb-12">
@@ -133,6 +114,61 @@ function renderHero() {
             <a href="mailto:${portfolioData.profile.email}" aria-label="Email" class="text-secondary-text hover:text-accent transition-all duration-300 hover:-translate-y-1"><i data-lucide="mail" width="24" height="24"></i></a>
         </div>
     `;
+
+    // Initialize the magnifier effect *after* rendering
+    setTimeout(initNameMagnifier, 0);
+}
+
+function initNameMagnifier() {
+    const container = document.getElementById('name-container');
+    const magnifierLayer = document.getElementById('magnifier-layer');
+    const rim = document.getElementById('magnifier-rim');
+
+    // Select custom cursor elements to hide them
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    if (!container || !magnifierLayer || !rim) return;
+
+    container.addEventListener('mouseenter', () => {
+        magnifierLayer.classList.remove('opacity-0');
+        rim.classList.remove('opacity-0', 'scale-75'); // Scale up
+
+        // Hide global custom cursor
+        if (cursorDot) cursorDot.classList.add('opacity-0');
+        if (cursorOutline) cursorOutline.classList.add('opacity-0');
+    });
+
+    container.addEventListener('mouseleave', () => {
+        magnifierLayer.classList.add('opacity-0');
+        rim.classList.add('opacity-0', 'scale-75'); // Scale down
+
+        // Show global custom cursor
+        if (cursorDot) cursorDot.classList.remove('opacity-0');
+        if (cursorOutline) cursorOutline.classList.remove('opacity-0');
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Size of the lens (Matches w-32 = 8rem = 128px)
+        const size = 128;
+        const radius = size / 2;
+
+        // Update Clip Path for the magnified text
+        // We clip the magnified layer to a circle at the mouse position
+        magnifierLayer.style.clipPath = `circle(${radius}px at ${x}px ${y}px)`;
+
+        // Move the visible rim to follow the mouse (centered)
+        rim.style.left = `${x - radius}px`;
+        rim.style.top = `${y - radius}px`;
+
+        // The Magic: Scale the text layer from the mouse position
+        magnifierLayer.style.transformOrigin = `${x}px ${y}px`;
+        magnifierLayer.style.transform = 'scale(1.35)'; // Slightly increased magnification
+    });
 }
 
 function renderExperience() {

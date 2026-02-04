@@ -58,7 +58,7 @@
 </head>
 
 <body
-    class="bg-bg text-text font-main leading-relaxed overflow-x-hidden antialiased selection:bg-accent selection:text-white">
+    class="bg-bg text-text font-main leading-relaxed overflow-x-hidden antialiased selection:bg-accent selection:text-white pb-32">
     <div
         class="cursor-dot fixed top-0 left-0 w-2 h-2 bg-accent rounded-full z-[9999] pointer-events-none -translate-x-1/2 -translate-y-1/2 hidden md:block">
     </div>
@@ -66,51 +66,7 @@
         class="cursor-outline fixed top-0 left-0 w-10 h-10 border border-accent rounded-full z-[9999] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ease-out hidden md:block">
     </div>
 
-    <nav class="fixed w-full top-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
-        <div class="container flex justify-between items-center py-6 px-5 lg:px-0">
-            <div class="text-2xl font-bold font-mono text-text">MI.</div>
 
-            <!-- Desktop Menu -->
-            <ul class="hidden md:flex gap-8 list-none">
-                <li><a href="#about"
-                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">About<span
-                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
-                </li>
-                <li><a href="#experience"
-                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">Experience<span
-                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
-                </li>
-                <li><a href="#projects"
-                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">Projects<span
-                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
-                </li>
-                <li><a href="#contact"
-                        class="text-secondary-text hover:text-text font-medium transition-colors relative group">Contact<span
-                            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span></a>
-                </li>
-            </ul>
-
-            <!-- Mobile Hamburger -->
-            <div class="md:hidden cursor-pointer z-[1001] space-y-1.5 group" id="hamburger">
-                <span class="block w-6 h-0.5 bg-text transition-transform duration-300 origin-center"></span>
-                <span class="block w-6 h-0.5 bg-text transition-opacity duration-300"></span>
-                <span class="block w-6 h-0.5 bg-text transition-transform duration-300 origin-center"></span>
-            </div>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div class="fixed inset-0 bg-bg/95 backdrop-blur-xl z-[1000] flex flex-col justify-center items-center gap-8 transition-all duration-300 translate-x-full md:hidden"
-            id="mobile-menu">
-            <a href="#about"
-                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">About</a>
-            <a href="#experience"
-                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">Experience</a>
-            <a href="#projects"
-                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">Projects</a>
-            <a href="#contact"
-                class="text-2xl font-medium text-secondary-text hover:text-accent transition-colors mobile-link">Contact</a>
-        </div>
-    </nav>
 
     <main>
         <section id="hero" class="min-h-screen flex items-center justify-center text-center px-4 relative pt-20">
@@ -161,6 +117,56 @@
     <footer class="text-center py-8 border-t border-white/5 text-secondary-text text-sm">
         <p>&copy; 2025 Mohammed Isham. All rights reserved.</p>
     </footer>
+
+    <!-- Floating Dock Navigation -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+        <nav
+            class="flex items-center gap-2 px-6 py-4 bg-[#171717]/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+
+            <a href="#hero" class="group relative p-3 rounded-full hover:bg-white/10 transition-all duration-300">
+                <i data-lucide="home" class="w-6 h-6 text-secondary-text group-hover:text-accent transition-colors"></i>
+                <span
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-card-bg border border-white/10 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">Home</span>
+            </a>
+
+            <div class="w-px h-6 bg-white/10 mx-1"></div>
+
+            <a href="#experience" class="group relative p-3 rounded-full hover:bg-white/10 transition-all duration-300">
+                <i data-lucide="briefcase"
+                    class="w-6 h-6 text-secondary-text group-hover:text-accent transition-colors"></i>
+                <span
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-card-bg border border-white/10 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">Experience</span>
+            </a>
+
+            <a href="#education" class="group relative p-3 rounded-full hover:bg-white/10 transition-all duration-300">
+                <i data-lucide="graduation-cap"
+                    class="w-6 h-6 text-secondary-text group-hover:text-accent transition-colors"></i>
+                <span
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-card-bg border border-white/10 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">Education</span>
+            </a>
+
+            <a href="#skills" class="group relative p-3 rounded-full hover:bg-white/10 transition-all duration-300">
+                <i data-lucide="cpu" class="w-6 h-6 text-secondary-text group-hover:text-accent transition-colors"></i>
+                <span
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-card-bg border border-white/10 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">Skills</span>
+            </a>
+
+            <a href="#projects" class="group relative p-3 rounded-full hover:bg-white/10 transition-all duration-300">
+                <i data-lucide="folder-git-2"
+                    class="w-6 h-6 text-secondary-text group-hover:text-accent transition-colors"></i>
+                <span
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-card-bg border border-white/10 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">Projects</span>
+            </a>
+
+            <div class="w-px h-6 bg-white/10 mx-1"></div>
+
+            <a href="#contact" class="group relative p-3 rounded-full hover:bg-accent/20 transition-all duration-300">
+                <i data-lucide="mail" class="w-6 h-6 text-secondary-text group-hover:text-accent transition-colors"></i>
+                <span
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-card-bg border border-white/10 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">Contact</span>
+            </a>
+        </nav>
+    </div>
 
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
