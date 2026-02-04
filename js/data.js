@@ -89,14 +89,6 @@ const portfolioData = {
                 "Privacy"
             ],
             "details": "Implemented features to enhance user experience, such as a timer and tab blurring."
-        },
-        {
-            "title": "New Project",
-            "description": "Description",
-            "tags": [
-                "Tag1"
-            ],
-            "details": "Details"
         }
     ]
 };
